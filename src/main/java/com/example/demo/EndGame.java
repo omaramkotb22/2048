@@ -44,7 +44,7 @@ public class EndGame {
         quitButton.setTextFill(Color.PINK);
         root.getChildren().add(quitButton);
         quitButton.relocate(100,800);
-        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() { //
             @Override
             public void handle(MouseEvent event) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -6,21 +6,35 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/*
+    * This Class handles the Cells on the board
+*/
+
 public class Cell {
     private Rectangle rectangle;
     private Group root;
     private Text textClass;
     private boolean modify = false;
 
+    /*
+    * @param modify to be set
+    */
     void setModify(boolean modify) {
         this.modify = modify;
     }
 
+    /*
+    * @return true if the cell has been modified
+    * */
     boolean getModify() {
         return modify;
     }
 
-    Cell(double x, double y, double scale, Group root) {
+    /*
+    * Constructor for the Cell class
+    * @param x is the width of the block
+    * */
+    Cell(double x, double y, double scale, Group root) { // Constructor for the Cell class, takes the width of the cell x the height of the cell y, the score on the Cell scale, and the group root
         rectangle = new Rectangle();
         rectangle.setX(x);
         rectangle.setY(y);
@@ -31,7 +45,9 @@ public class Cell {
         this.textClass = TextMaker.getSingleInstance().madeText("0", x, y, root);
         root.getChildren().add(rectangle);
     }
-
+    /*
+    * @param textClass
+    */
     void setTextClass(Text textClass) {
         this.textClass = textClass;
     }

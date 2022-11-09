@@ -13,7 +13,7 @@ import java.util.Random;
 
 class GameScene {
     private static int HEIGHT = 700;
-    private static int n = 4;
+    private static int n = 4; // Number of the of cells on each place of the block
     private final static int distanceBetweenCells = 10;
     private static double LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
     private TextMaker textMaker = TextMaker.getSingleInstance();
@@ -21,27 +21,34 @@ class GameScene {
     private Group root;
     private long score = 0;
 
+    /*
+    * @param number
+    * setting the number of blocks horizontally and vertically
+    * setting the length of each cell according to the number of lines
+    */
     static void setN(int number) {
         n = number;
         LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
     }
-
+    /*
+    * @return length of the block
+    */
     static double getLENGTH() {
         return LENGTH;
     }
 
     private void randomFillNumber(int turn) {
 
-        Cell[][] emptyCells = new Cell[n][n];
+        Cell[][] emptyCells = new Cell[n][n]; // Create an array of arrays of cells, these will be the cells present on the block
         int a = 0;
         int b = 0;
         int aForBound=0,bForBound=0;
         outer:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (cells[i][j].getNumber() == 0) {
-                    emptyCells[a][b] = cells[i][j];
-                    if (b < n-1) {
+                if (cells[i][j].getNumber() == 0) { // if cell has is empty
+                    emptyCells[a][b] = cells[i][j]; // set cell that has the position a and b to be the same cell that has the position
+                    if (b < n-1) { // then, if b is less than n - 1 (3), it is going to set bForBound to whatever b is
                         bForBound=b;
                         b++;
 
@@ -49,7 +56,7 @@ class GameScene {
                         aForBound=a;
                         a++;
                         b = 0;
-                        if(a==n)
+                        if(a==n) // if a == n exit the loop
                             break outer;
                     }
                 }
@@ -61,13 +68,13 @@ class GameScene {
         Text text;
         Random random = new Random();
         boolean putTwo = true;
-        if (random.nextInt() % 2 == 0)
+        if (random.nextInt() % 2 == 0) // if the random number generated was divisible by 2
             putTwo = false;
         int xCell, yCell;
             xCell = random.nextInt(aForBound+1);
             yCell = random.nextInt(bForBound+1);
         if (putTwo) {
-            text = textMaker.madeText("2", emptyCells[xCell][yCell].getX(), emptyCells[xCell][yCell].getY(), root);
+            text = textMaker.madeText("2", emptyCells[xCell][yCell].getX(), emptyCells[xCell][yCell].getY(), root); // add the number 2 on the empty cell if putTwo is true
             emptyCells[xCell][yCell].setTextClass(text);
             root.getChildren().add(text);
             emptyCells[xCell][yCell].setColorByNumber(2);

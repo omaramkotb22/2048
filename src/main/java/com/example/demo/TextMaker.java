@@ -11,13 +11,17 @@ class TextMaker {
     private TextMaker() {
 
     }
-
+    /*
+    * @return a TextMaker if singleInstance is not equal to null
+    */
     static TextMaker getSingleInstance() {
         if (singleInstance == null)
             singleInstance = new TextMaker();
         return singleInstance;
     }
-
+    /*
+    * @return a text that will be written on a cell
+    * */
     Text madeText(String input, double xCell, double yCell, Group root) {
         double length = GameScene.getLENGTH();
         double fontSize = (3 * length) / 7.0;
@@ -29,6 +33,10 @@ class TextMaker {
         return text;
     }
 
+    /*
+    * @param first text that will be changed
+    * @param second text that should replace the first text
+    * */
     static void changeTwoText(Text first, Text second) {
         String temp;
         temp = first.getText();
