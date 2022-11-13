@@ -16,8 +16,8 @@ class GameScene {
     private static int n = 4; // Number of the of cells on each place of the block
     private final static int distanceBetweenCells = 10;
     private static double LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
-    private TextMaker textMaker = TextMaker.getSingleInstance();
-    private Cell[][] cells = new Cell[n][n];
+    private final TextMaker textMaker = TextMaker.getSingleInstance();
+    private final Cell[][] cells = new Cell[n][n];
     private Group root;
     private long score = 0;
 
@@ -36,17 +36,15 @@ class GameScene {
     static double getLENGTH() {
         return LENGTH;
     }
+    private int aForBound=0,bForBound=0;
 
-    private void randomFillNumber(int turn) {
-
-        Cell[][] emptyCells = new Cell[n][n]; // Create an array of arrays of cells, these will be the cells present on the block
+    private void chooseCellBounds(Cell[][] emptyCells){
         int a = 0;
         int b = 0;
-        int aForBound=0,bForBound=0;
         outer:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (cells[i][j].getNumber() == 0) { // if cell has is empty
+                if (cells[i][j].getNumber() == 0) { // if cell is empty
                     emptyCells[a][b] = cells[i][j]; // set cell that has the position a and b to be the same cell that has the position
                     if (b < n-1) { // then, if b is less than n - 1 (3), it is going to set bForBound to whatever b is
                         bForBound=b;
@@ -63,16 +61,15 @@ class GameScene {
             }
         }
 
-
-
+    }
+    private void addRandomNumber(Cell[][] emptyCells){
         Text text;
         Random random = new Random();
-        boolean putTwo = true;
-        if (random.nextInt() % 2 == 0) // if the random number generated was divisible by 2
-            putTwo = false;
+        boolean putTwo = random.nextInt() % 2 != 0;
+        // if the random number generated was divisible by 2
         int xCell, yCell;
-            xCell = random.nextInt(aForBound+1);
-            yCell = random.nextInt(bForBound+1);
+        xCell = random.nextInt(aForBound+1);
+        yCell = random.nextInt(bForBound+1);
         if (putTwo) {
             text = textMaker.madeText("2", emptyCells[xCell][yCell].getX(), emptyCells[xCell][yCell].getY(), root); // add the number 2 on the empty cell if putTwo is true
             emptyCells[xCell][yCell].setTextClass(text);
@@ -84,6 +81,14 @@ class GameScene {
             root.getChildren().add(text);
             emptyCells[xCell][yCell].setColorByNumber(4);
         }
+
+    }
+    /*@param turn
+    * */
+    private void randomFillNumber(int turn) {
+        Cell[][] emptyCells = new Cell[n][n]; // Create an array of arrays of cells, these will be the cells present on the block
+        chooseCellBounds(emptyCells);
+        addRandomNumber(emptyCells);
     }
 
     private int  haveEmptyCell() {
@@ -199,10 +204,8 @@ class GameScene {
 
     private boolean isValidDesH(int i, int j, int des, int sign) {
         if (des + sign < n && des + sign >= 0) {
-            if (cells[i][des + sign].getNumber() == cells[i][j].getNumber() && !cells[i][des + sign].getModify()
-                    && cells[i][des + sign].getNumber() != 0) {
-                return true;
-            }
+            return cells[i][des + sign].getNumber() == cells[i][j].getNumber() && !cells[i][des + sign].getModify()
+                    && cells[i][des + sign].getNumber() != 0;
         }
         return false;
     }
@@ -218,10 +221,8 @@ class GameScene {
 
     private boolean isValidDesV(int i, int j, int des, int sign) {
         if (des + sign < n && des + sign >= 0)
-            if (cells[des + sign][j].getNumber() == cells[i][j].getNumber() && !cells[des + sign][j].getModify()
-                    && cells[des + sign][j].getNumber() != 0) {
-                return true;
-            }
+            return cells[des + sign][j].getNumber() == cells[i][j].getNumber() && !cells[des + sign][j].getModify()
+                    && cells[des + sign][j].getNumber() != 0;
         return false;
     }
 
@@ -238,8 +239,7 @@ class GameScene {
         if (i < n - 1 && j < n - 1) {
             if (cells[i + 1][j].getNumber() == cells[i][j].getNumber())
                 return true;
-            if (cells[i][j + 1].getNumber() == cells[i][j].getNumber())
-                return true;
+            return cells[i][j + 1].getNumber() == cells[i][j].getNumber();
         }
         return false;
     }
