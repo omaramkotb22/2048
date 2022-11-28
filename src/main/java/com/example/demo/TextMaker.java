@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-class TextMaker {
+class TextMaker implements TextMakerInterface{
     private static TextMaker singleInstance = null;
 
     private TextMaker() {
@@ -42,7 +42,6 @@ class TextMaker {
         temp = first.getText();
         first.setText(second.getText());
         second.setText(temp);
-
         double tempNumber;
         tempNumber = first.getX();
         first.setX(second.getX());
@@ -51,7 +50,6 @@ class TextMaker {
         tempNumber = first.getY();
         first.setY(second.getY());
         second.setY(tempNumber);
-
     }
 
 }
