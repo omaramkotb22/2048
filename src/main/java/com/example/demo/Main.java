@@ -1,20 +1,16 @@
 package com.example.demo;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.ButtonType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Optional;
 import java.util.Scanner;
     /*
     * Main class creates the window that the game will be played on
@@ -25,8 +21,10 @@ public class Main extends Application { // Inheriting the Application class from
     static final int WIDTH = 900; // Setting the Width of the Window to 900
     static final int HEIGHT = 900; // Setting the Length of the Window to 900
     private Group gameRoot = new Group();// This is the root for the other game groups
+
     private Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
     private static Scanner input = new Scanner(System.in); // New object of Class Scanner to retrieve input from user
+
 
 
     public void setGameScene(Scene gameScene) { // sets the scene that will be used during gameplay
@@ -45,6 +43,7 @@ public class Main extends Application { // Inheriting the Application class from
     @Override
     public void start(Stage primaryStage) throws Exception {
         Group menuRoot = new Group(); // this group will be the root of all the other menu groups that will be created
+
         Scene menuScene = new Scene(menuRoot, WIDTH, HEIGHT); // This creates the menu scene that will later be used to generate the menu
         Group accountRoot = new Group(); // The account root has no children
         Scene accountScene = new Scene(accountRoot, WIDTH, HEIGHT, Color.rgb(150, 20, 100, 0.2)); // This creates the account scenes that will later be used to generate the accounts
@@ -62,22 +61,14 @@ public class Main extends Application { // Inheriting the Application class from
         backgroundOfMenu.setX(WIDTH / 2 - 120);
         backgroundOfMenu.setY(180);
         menuRoot.getChildren().add(backgroundOfMenu);
-
-        // Background of menu for play design
-        Rectangle backgroundOfMenuForPlay = new Rectangle(240, 140, Color.rgb(120, 20, 100, 0.2));
-        backgroundOfMenuForPlay.setX(WIDTH / 2 - 120);
-        backgroundOfMenuForPlay.setY(180);
-        accountRoot.getChildren().add(backgroundOfMenuForPlay);
-
-        Group gameRoot = new Group();
-        setGameRoot(gameRoot);
-        Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
-        setGameScene(gameScene);
-        primaryStage.setScene(gameScene);
-        GameScene game = new GameScene();
-        game.game(gameScene, gameRoot, primaryStage, endGameScene, endgameRoot);
-
+        Parent root = FXMLLoader.load(getClass().getResource("mainMenuLight.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.show();
+
+
+
+
     }
 
     public static void main(String[] args) {
