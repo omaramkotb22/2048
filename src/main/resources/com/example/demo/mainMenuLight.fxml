@@ -23,7 +23,7 @@
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
-        <Button fx:id="settings" layoutX="137.0" layoutY="422.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="326.0" text="Settings" textFill="#23bfdf">
+        <Button fx:id="settings" layoutX="137.0" layoutY="422.0" mnemonicParsing="false" onAction="#SwitchToSettings" prefHeight="70.0" prefWidth="326.0" text="Settings" textFill="#23bfdf">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>

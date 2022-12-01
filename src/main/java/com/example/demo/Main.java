@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Objects;
 import java.util.Scanner;
     /*
     * Main class creates the window that the game will be played on
@@ -61,14 +62,10 @@ public class Main extends Application { // Inheriting the Application class from
         backgroundOfMenu.setX(WIDTH / 2 - 120);
         backgroundOfMenu.setY(180);
         menuRoot.getChildren().add(backgroundOfMenu);
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenuLight.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenuLight.fxml")));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
-
     }
 
     public static void main(String[] args) {
