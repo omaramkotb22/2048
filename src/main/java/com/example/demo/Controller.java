@@ -44,6 +44,13 @@ public class Controller {
        stage.setScene(scene);
        stage.show();
     }
+    public void PopUpOptionsWindow(ActionEvent actionevent) throws IOException{
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OptionsMenu.fxml")));
+        stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 

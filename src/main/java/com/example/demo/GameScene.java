@@ -1,8 +1,15 @@
 package com.example.demo;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
@@ -19,7 +26,7 @@ class GameScene {
     }
 
     private static int n = 4; // Number of the of cells on each place of the block
-    private static int distanceBetweenCells = 10;
+    private static final int distanceBetweenCells = 10;
     private static double LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
     private TextMaker textMaker = TextMaker.getSingleInstance();
 
@@ -113,6 +120,17 @@ class GameScene {
             }
         }
     }
+    void createOptionsButton(Group root){
+        Button optionsButton = new Button();
+        optionsButton.setText("Options");
+        optionsButton.setTranslateX(750);
+        optionsButton.setTranslateY(250);
+        optionsButton.setFocusTraversable(false);
+
+        optionsButton.setOnAction(new EventHandler<ActionEvent>(){ PopUpOptions
+        });
+        root.getChildren().add(optionsButton);
+    }
 
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
@@ -126,14 +144,16 @@ class GameScene {
 
         Text text = new Text();
         root.getChildren().add(text);
-        text.setText("SCORE :");
+        text.setText("SCORE:");
         text.setFont(Font.font(30));
         text.relocate(750, 100);
         Text scoreText = new Text();
         root.getChildren().add(scoreText);
-        scoreText.relocate(750, 150);
-        scoreText.setFont(Font.font(20));
+        scoreText.relocate(750.0, 150.0);
+        scoreText.setFont(Font.font(20.0));
         scoreText.setText("0");
+        createOptionsButton(root);
+
 
         randomFillNumber(1);
         randomFillNumber(1);
