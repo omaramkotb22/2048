@@ -61,10 +61,6 @@ public class Main extends Application { // Inheriting the Application class from
 //        Background background = new Background(background_fill);
 
         // Menu Background designing
-        Rectangle backgroundOfMenu = new Rectangle(240, 120, Color.rgb(120, 120, 120, 0.2));
-        backgroundOfMenu.setX(WIDTH / 2 - 120);
-        backgroundOfMenu.setY(180);
-        menuRoot.getChildren().add(backgroundOfMenu);
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenuLight.fxml")));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

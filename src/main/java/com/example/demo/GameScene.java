@@ -1,21 +1,24 @@
 package com.example.demo;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
+
+import java.io.IOException;
 import java.util.Random;
 
 class GameScene {
@@ -120,26 +123,57 @@ class GameScene {
             }
         }
     }
-    void createOptionsButton(Group root){
+    void OptionsButton(Group root){
         Button optionsButton = new Button();
         optionsButton.setText("Options");
+        optionsButton.setTextFill(Color.rgb(35,191,223));
+
         optionsButton.setTranslateX(750);
         optionsButton.setTranslateY(250);
-        optionsButton.setFocusTraversable(false);
+        optionsButton.setPrefSize(100, 50);
+        optionsButton.setStyle("-fx-background-color: #ffffff; -fx-font-weight: 15; -fx-font-size: 20 px");
 
-        optionsButton.setOnAction(new EventHandler<ActionEvent>(){ PopUpOptions
-        });
+
+        optionsButton.setOnAction(e-> displayOptionPopup(root));
+        optionsButton.setFocusTraversable(false);
         root.getChildren().add(optionsButton);
     }
 
+    private void displayOptionPopup(Group root) {
+        Stage popup = new Stage();
+        popup.initModality(Modality.APPLICATION_MODAL);
+        VBox vBox = new VBox();
+        Button ResumeBtn = new Button("Resume");
+        vBox.getChildren().add(ResumeBtn);
+        ResumeBtn.setOnAction(e->popup.close());
+        Button MainMenuBtn = new Button("Menu");
+        vBox.getChildren().add(MainMenuBtn);
+        MainMenuBtn.setOnAction(e-> {
+            try {
+                ((Stage)root.getScene().getWindow()).close();
+                new Controller().SwitchToMenu(e);
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        });
+        MainMenuBtn.setFocusTraversable(false);
+        vBox.setAlignment(Pos.CENTER);
+        Scene popupScene = new Scene(vBox, 300,250);
+        popup.setScene(popupScene);
+        popup.showAndWait();
+    }
+
+
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
+
         this.root = root;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 cells[i][j] = new Cell((j) * LENGTH + (j + 1) * distanceBetweenCells,
                         (i) * LENGTH + (i + 1) * distanceBetweenCells, LENGTH, root);
             }
-
         }
 
         Text text = new Text();
@@ -152,7 +186,7 @@ class GameScene {
         scoreText.relocate(750.0, 150.0);
         scoreText.setFont(Font.font(20.0));
         scoreText.setText("0");
-        createOptionsButton(root);
+        OptionsButton(root);
 
 
         randomFillNumber(1);

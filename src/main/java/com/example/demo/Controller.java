@@ -22,8 +22,10 @@ public class Controller {
     public Button help;
     private static Stage stage;
     private final Group gameRoot = new Group();
+    private static Scene scene;
     private final Group controlsRoot = new Group();
     GameScene game = new GameScene();
+
 
     public void StartButtonClicked(ActionEvent actionEvent) {
         Group endgameRoot = new Group();
@@ -37,19 +39,20 @@ public class Controller {
         game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot);
         stage.show();
     }
+    public void SwitchToMenu(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenuLight.fxml")));
+        Scene MenuScene = new Scene(root);
+        Stage MenuStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        MenuStage.setScene(MenuScene);
+        MenuStage.show();
+    }
     public void SwitchToSettings(ActionEvent actionevent) throws IOException {
        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SettingsLightTheme.fxml")));
+       Scene SettingsScene = new Scene(root);
        stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-       stage.setScene(scene);
+       stage.setScene(SettingsScene);
        stage.show();
-    }
-    public void PopUpOptionsWindow(ActionEvent actionevent) throws IOException{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OptionsMenu.fxml")));
-        stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
 
