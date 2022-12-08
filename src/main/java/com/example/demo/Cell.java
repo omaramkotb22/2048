@@ -34,6 +34,10 @@ public class Cell {
         return modify;
     }
 
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
     /*
      * Constructor for the Cell class
      * @param x is the width of the block
@@ -47,7 +51,7 @@ public class Cell {
         this.root = root;
         rectangle.setFill(Color.rgb(224, 226, 226, 0.5));
         this.textClass = TextMaker.getSingleInstance().madeText("0", x, y, root);
-        root.getChildren().add(rectangle);
+
     }
     /*
      * @param textClass
@@ -56,8 +60,6 @@ public class Cell {
         this.textClass = textClass;
     }
     void changeCell(Cell cell) {
-        //    TODO: make a new class for changetwotext method and get the class down below
-
         TextMaker.changeTwoText(textClass, cell.getTextClass());
         root.getChildren().remove(cell.getTextClass());
         root.getChildren().remove(textClass);

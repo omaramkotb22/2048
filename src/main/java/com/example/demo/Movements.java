@@ -53,6 +53,7 @@ public class Movements {
             } else if (k == n - 1) {
                 coordinate = n - 1;
             }
+
         }
         return coordinate;
     }
@@ -123,6 +124,7 @@ public class Movements {
             for (int j = n - 1; j >= 0; j--) {
                 moveHorizontally(i, j, passDestination(i, j, 'r'), 1);
             }
+
             for (int j = 0; j < n; j++) {
                 cells[i][j].setModify(false);
             }

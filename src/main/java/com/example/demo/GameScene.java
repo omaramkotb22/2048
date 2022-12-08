@@ -5,16 +5,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 
@@ -22,7 +18,7 @@ import java.io.IOException;
 import java.util.Random;
 
 class GameScene {
-    private static int HEIGHT = 700;
+    private static final int HEIGHT = 500;
 
     public static int getN() {
         return n;
@@ -31,7 +27,7 @@ class GameScene {
     private static int n = 4; // Number of the of cells on each place of the block
     private static final int distanceBetweenCells = 10;
     private static double LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
-    private TextMaker textMaker = TextMaker.getSingleInstance();
+    private final TextMaker textMaker = TextMaker.getSingleInstance();
 
 
     private static Cell[][] cells = new Cell[n][n];
@@ -42,7 +38,7 @@ class GameScene {
     }
 
     public void setCells(Cell[][] cells) {
-        this.cells = cells;
+        GameScene.cells = cells;
     }
 
 
@@ -125,15 +121,10 @@ class GameScene {
     }
     void OptionsButton(Group root){
         Button optionsButton = new Button();
-        optionsButton.setText("Options");
-        optionsButton.setTextFill(Color.rgb(35,191,223));
-
-        optionsButton.setTranslateX(750);
-        optionsButton.setTranslateY(250);
-        optionsButton.setPrefSize(100, 50);
-        optionsButton.setStyle("-fx-background-color: #ffffff; -fx-font-weight: 15; -fx-font-size: 20 px");
-
-
+        GameSceneStyles.Button(optionsButton, "Options");
+        optionsButton.setTranslateX(50);
+        optionsButton.setTranslateY(540);
+        optionsButton.setPrefSize(150, 50);
         optionsButton.setOnAction(e-> displayOptionPopup(root));
         optionsButton.setFocusTraversable(false);
         root.getChildren().add(optionsButton);
@@ -143,10 +134,13 @@ class GameScene {
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         VBox vBox = new VBox();
-        Button ResumeBtn = new Button("Resume");
+        vBox.setSpacing(10);
+        Button ResumeBtn = new Button();
+        GameSceneStyles.Button(ResumeBtn,"Resume");
         vBox.getChildren().add(ResumeBtn);
         ResumeBtn.setOnAction(e->popup.close());
-        Button MainMenuBtn = new Button("Menu");
+        Button MainMenuBtn = new Button();
+        GameSceneStyles.Button(MainMenuBtn, "Main Manu");
         vBox.getChildren().add(MainMenuBtn);
         MainMenuBtn.setOnAction(e-> {
             try {
@@ -171,24 +165,28 @@ class GameScene {
         this.root = root;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                cells[i][j] = new Cell((j) * LENGTH + (j + 1) * distanceBetweenCells,
-                        (i) * LENGTH + (i + 1) * distanceBetweenCells, LENGTH, root);
+                double locX = (j) * LENGTH + (j + 1) * distanceBetweenCells + 40;
+                double locY = (i) * LENGTH + (i + 1) * distanceBetweenCells + 40;
+                cells[i][j] = new Cell(locX,locY, LENGTH, root);
+                cells[i][j].getRectangle().relocate(locX,locY);
+                root.getChildren().add(cells[i][j].getRectangle());
             }
+
+
         }
+
 
         Text text = new Text();
         root.getChildren().add(text);
-        text.setText("SCORE:");
-        text.setFont(Font.font(30));
-        text.relocate(750, 100);
+        text.setText("Score:");
+        GameSceneStyles.ScoreText(text);
+        text.relocate(50, 10);
         Text scoreText = new Text();
         root.getChildren().add(scoreText);
-        scoreText.relocate(750.0, 150.0);
-        scoreText.setFont(Font.font(20.0));
+        scoreText.relocate(140, 30);
+        GameSceneStyles.ScoreText(scoreText);
         scoreText.setText("0");
         OptionsButton(root);
-
-
         randomFillNumber(1);
         randomFillNumber(1);
 
@@ -204,13 +202,15 @@ class GameScene {
                 } else if (key.getCode() == KeyCode.RIGHT) {
                     Movements.moveRight();
                 }
+                else {
+                    return;
+                }
                 GameScene.this.sumCellNumbersToScore();
                 scoreText.setText(score + "");
                 haveEmptyCell = Checkers.haveEmptyCell();
                 if (haveEmptyCell == -1) {
                     if (Checkers.canNotMove()) {
                         primaryStage.setScene(endGameScene);
-
                         EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
                         root.getChildren().clear();
                         score = 0;

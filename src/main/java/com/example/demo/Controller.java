@@ -29,11 +29,11 @@ public class Controller {
 
     public void StartButtonClicked(ActionEvent actionEvent) {
         Group endgameRoot = new Group();
-        int HEIGHT = 900;
-        int WIDTH = 900;
+        int HEIGHT = 600;
+        int WIDTH = 600;
         Scene endGameScene = new Scene(endgameRoot, WIDTH, HEIGHT, Color.rgb(250, 20, 100, 0.2));
-        Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
-        Scene controlsScene = new Scene(controlsRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
+        Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(200,200,200));
+//        Scene controlsScene = new Scene(controlsRoot, WIDTH, HEIGHT, Color.rgb(255,255,255));
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(gameScene);
         game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot);
