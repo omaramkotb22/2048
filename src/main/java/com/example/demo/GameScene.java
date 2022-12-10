@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,6 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 
 class GameScene {
+
     private static final int HEIGHT = 500;
 
     public static int getN() {
@@ -175,7 +175,6 @@ class GameScene {
 
         }
 
-
         Text text = new Text();
         root.getChildren().add(text);
         text.setText("Score:");
@@ -194,6 +193,7 @@ class GameScene {
             Platform.runLater(() -> {
                 int haveEmptyCell;
                 if (key.getCode() == KeyCode.DOWN) {
+                    primaryStage.setScene(endGameScene);
                     Movements.moveDown();
                 } else if (key.getCode() == KeyCode.UP) {
                     Movements.moveUp();
@@ -211,7 +211,8 @@ class GameScene {
                 if (haveEmptyCell == -1) {
                     if (Checkers.canNotMove()) {
                         primaryStage.setScene(endGameScene);
-                        EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
+                        EndGame.getInstance().endGameShow(endGameRoot, primaryStage, score);
+
                         root.getChildren().clear();
                         score = 0;
                     }

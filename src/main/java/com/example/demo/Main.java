@@ -34,9 +34,7 @@ public class Main extends Application { // Inheriting the Application class from
 
 
 
-    public void setGameRoot(Group gameRoot) { // sets game root
-        this.gameRoot = gameRoot;
-    }
+    
 
 
     /*

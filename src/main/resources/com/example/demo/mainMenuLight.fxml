@@ -13,7 +13,7 @@
                 <Image url="@LightThemeLogo.png" />
             </image>
         </ImageView>
-        <Button fx:id="start" layoutX="137.0" layoutY="257.0" mnemonicParsing="false" onAction="#StartButtonClicked" prefHeight="70.0" prefWidth="326.0" text="Start" textFill="#23bfdf">
+        <Button fx:id="start" layoutX="137.0" layoutY="257.0" mnemonicParsing="false" onAction="#StartGameScene" prefHeight="70.0" prefWidth="326.0" text="Start" textFill="#23bfdf">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>

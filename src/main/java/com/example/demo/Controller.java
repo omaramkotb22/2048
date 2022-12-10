@@ -27,12 +27,12 @@ public class Controller {
     GameScene game = new GameScene();
 
 
-    public void StartButtonClicked(ActionEvent actionEvent) {
+    public void StartGameScene(ActionEvent actionEvent) {
         Group endgameRoot = new Group();
         int HEIGHT = 600;
         int WIDTH = 600;
-        Scene endGameScene = new Scene(endgameRoot, WIDTH, HEIGHT, Color.rgb(250, 20, 100, 0.2));
         Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(200,200,200));
+        Scene endGameScene = new Scene(endgameRoot, 200, 150, Color.rgb(200,200,200));
 //        Scene controlsScene = new Scene(controlsRoot, WIDTH, HEIGHT, Color.rgb(255,255,255));
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(gameScene);
@@ -40,7 +40,6 @@ public class Controller {
         stage.show();
     }
     public void SwitchToMenu(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenuLight.fxml")));
         Scene MenuScene = new Scene(root);
         Stage MenuStage = (Stage)((Node) event.getSource()).getScene().getWindow();
