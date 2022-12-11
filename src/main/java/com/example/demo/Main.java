@@ -14,10 +14,10 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Objects;
 import java.util.Scanner;
-    /*
-    * Main class creates the window that the game will be played on
-    * This includes the All the Groups and the scenes associated to them
-    */
+/*
+ * Main class creates the window that the game will be played on
+ * This includes the All the Groups and the scenes associated to them
+ */
 
 public class Main extends Application { // Inheriting the Application class from Java fx to start designing the Window
     static final int WIDTH = 900;
@@ -34,12 +34,12 @@ public class Main extends Application { // Inheriting the Application class from
 
 
 
-    
+
 
 
     /*
-    * @param primaryStage
-    * */
+     * @param primaryStage
+     * */
 
     @Override
     public void start(Stage primaryStage) throws Exception {

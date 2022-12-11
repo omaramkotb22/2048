@@ -40,19 +40,22 @@ public class EndGame {
         GameSceneStyles.Button(quitGameBtn, "Quit Game");
         Button mainMenuButton = new Button();
         GameSceneStyles.Button(mainMenuButton, "Main Menu");
+        mainMenuButton.setFocusTraversable(false);
         mainMenuButton.setOnAction(e-> {
             try {
-                ((Stage) root.getScene().getWindow()).close();
                 new Controller().SwitchToMenu(e);
+                ((Stage)root.getParent().getScene().getWindow()).close();
+                ((Stage) root.getScene().getWindow()).close();
+
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         restartButton.setOnAction(e->new Controller().StartGameScene(e));
-        Text scoreText = new Text("Game Over \n Score: " + score);
+        Text scoreText = new Text("Game Over! \n Score: " + score);
         GameSceneStyles.ScoreText(scoreText);
-        vBox.getChildren().addAll(scoreText,restartButton,quitGameBtn, mainMenuButton);
+        vBox.getChildren().addAll(scoreText,restartButton, mainMenuButton,quitGameBtn);
         vBox.relocate(0,0);
         vBox.setAlignment(Pos.CENTER);
         Scene endGameScene = new Scene(vBox, 300, 250);

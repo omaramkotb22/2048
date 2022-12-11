@@ -31,6 +31,11 @@ class GameScene {
 
 
     private static Cell[][] cells = new Cell[n][n];
+
+    public Group getRoot() {
+        return root;
+    }
+
     private Group root;
     private long score = 0;
     public static Cell[][] getCells() {
@@ -146,7 +151,6 @@ class GameScene {
             try {
                 ((Stage)root.getScene().getWindow()).close();
                 new Controller().SwitchToMenu(e);
-
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -193,7 +197,7 @@ class GameScene {
             Platform.runLater(() -> {
                 int haveEmptyCell;
                 if (key.getCode() == KeyCode.DOWN) {
-                    primaryStage.setScene(endGameScene);
+                    EndGame.getInstance().endGameShow(endGameRoot, primaryStage, score);
                     Movements.moveDown();
                 } else if (key.getCode() == KeyCode.UP) {
                     Movements.moveUp();
@@ -210,10 +214,10 @@ class GameScene {
                 haveEmptyCell = Checkers.haveEmptyCell();
                 if (haveEmptyCell == -1) {
                     if (Checkers.canNotMove()) {
-                        primaryStage.setScene(endGameScene);
                         EndGame.getInstance().endGameShow(endGameRoot, primaryStage, score);
-
-                        root.getChildren().clear();
+                        ((Stage) root.getScene().getWindow()).close();
+                        ((Stage)endGameRoot.getScene().getWindow()).close();
+//                        root.getChildren().clear();
                         score = 0;
                     }
                 } else if(haveEmptyCell == 1)

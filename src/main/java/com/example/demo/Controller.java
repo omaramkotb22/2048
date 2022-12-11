@@ -47,11 +47,11 @@ public class Controller {
         MenuStage.show();
     }
     public void SwitchToSettings(ActionEvent actionevent) throws IOException {
-       Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SettingsLightTheme.fxml")));
-       Scene SettingsScene = new Scene(root);
-       stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
-       stage.setScene(SettingsScene);
-       stage.show();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SettingsLightTheme.fxml")));
+        Scene SettingsScene = new Scene(root);
+        stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
+        stage.setScene(SettingsScene);
+        stage.show();
     }
 
 
