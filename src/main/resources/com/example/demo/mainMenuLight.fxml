@@ -28,5 +28,10 @@
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
+      <Button fx:id="settings1" layoutX="137.0" layoutY="505.0" mnemonicParsing="false" onAction="#SwitchToLeaderboard" prefHeight="70.0" prefWidth="326.0" text="Leaderboard" textFill="#23bfdf">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

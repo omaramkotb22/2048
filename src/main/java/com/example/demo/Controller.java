@@ -9,8 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -53,7 +56,9 @@ public class Controller {
         stage.setScene(SettingsScene);
         stage.show();
     }
-
-
-
+    public void SwitchToLeaderboard(ActionEvent actionEvent) throws IOException{
+        stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        new Leaderboard().leaderboard(gameRoot, stage);
+        stage.show();
+    }
 }

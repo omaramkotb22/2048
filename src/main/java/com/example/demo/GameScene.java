@@ -32,9 +32,7 @@ class GameScene {
 
     private static Cell[][] cells = new Cell[n][n];
 
-    public Group getRoot() {
-        return root;
-    }
+
 
     private Group root;
     private long score = 0;

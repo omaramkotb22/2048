@@ -44,9 +44,8 @@ public class EndGame {
         mainMenuButton.setOnAction(e-> {
             try {
                 new Controller().SwitchToMenu(e);
-                ((Stage)root.getParent().getScene().getWindow()).close();
-                ((Stage) root.getScene().getWindow()).close();
-
+                ((Stage)root.getScene().getWindow()).close();
+                primaryStage.close();
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -60,6 +59,6 @@ public class EndGame {
         vBox.setAlignment(Pos.CENTER);
         Scene endGameScene = new Scene(vBox, 300, 250);
         popup.setScene(endGameScene);
-        popup.showAndWait();
+        popup.show();
     }
 }
