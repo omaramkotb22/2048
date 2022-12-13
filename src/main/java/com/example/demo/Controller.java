@@ -9,11 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -29,8 +26,11 @@ public class Controller {
     private final Group controlsRoot = new Group();
     GameScene game = new GameScene();
 
+    public Controller() throws IOException {
+    }
 
-    public void StartGameScene(ActionEvent actionEvent) {
+
+    public void StartGameScene(ActionEvent actionEvent) throws IOException {
         Group endgameRoot = new Group();
         int HEIGHT = 600;
         int WIDTH = 600;
@@ -39,7 +39,7 @@ public class Controller {
 //        Scene controlsScene = new Scene(controlsRoot, WIDTH, HEIGHT, Color.rgb(255,255,255));
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(gameScene);
-        game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot);
+        game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot, "Omar");
         stage.show();
     }
     public void SwitchToMenu(ActionEvent event) throws IOException {
@@ -58,7 +58,7 @@ public class Controller {
     }
     public void SwitchToLeaderboard(ActionEvent actionEvent) throws IOException{
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        new Leaderboard().leaderboard(gameRoot, stage);
+        new LeaderboardScene().leaderboard(gameRoot, stage);
         stage.show();
     }
 }

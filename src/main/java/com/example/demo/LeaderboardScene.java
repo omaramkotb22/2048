@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,13 +7,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Map;
 
-public class Leaderboard {
+public class LeaderboardScene {
 
     void leaderboard(Group root, Stage stage) throws IOException {
         var players = new ReadPlayers("src/main/resources/com/example/demo/players.csv");
@@ -32,6 +28,9 @@ public class Leaderboard {
         root.getChildren().add(textBox);
         Scene scene = new Scene(root,600,600);
         stage.setScene(scene);
+    }
+    private void addPlayer(String name, int score){
+
     }
 
 

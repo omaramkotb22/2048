@@ -10,6 +10,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Random;
 
 
 public class EndGame {
@@ -20,16 +22,18 @@ public class EndGame {
     private Scene endGameScene;
     private static EndGame singleInstance = null;
 
-    private EndGame(){
+    private EndGame() throws IOException {
 
     }
-    public static EndGame getInstance(){
+    public static EndGame getInstance() throws IOException {
         if(singleInstance == null)
             singleInstance = new EndGame();
         return singleInstance;
     }
+    private ReadPlayers map = new ReadPlayers("src/main/resources/com/example/demo/players.csv");
 
-    public void endGameShow(Group root, Stage primaryStage, long score){
+    public void endGameShow(Group root, Stage primaryStage, long score, String name) throws IOException {
+        var currentHighScore = map.getMap().get(name);
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         VBox vBox = new VBox();
@@ -44,15 +48,28 @@ public class EndGame {
         mainMenuButton.setOnAction(e-> {
             try {
                 new Controller().SwitchToMenu(e);
-                ((Stage)root.getScene().getWindow()).close();
                 primaryStage.close();
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-        restartButton.setOnAction(e->new Controller().StartGameScene(e));
-        Text scoreText = new Text("Game Over! \n Score: " + score);
+        restartButton.setOnAction(e->{
+            try {
+                new Controller().StartGameScene(e);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        });
+        Text scoreText = new Text();
+        if(score > currentHighScore){
+            scoreText.setText("Game Over\nNew Highscore!" + score);
+
+        }
+        else{
+            scoreText.setText("Game Over\n" + score + "\nHighscore still" + currentHighScore);
+        }
         GameSceneStyles.ScoreText(scoreText);
         vBox.getChildren().addAll(scoreText,restartButton, mainMenuButton,quitGameBtn);
         vBox.relocate(0,0);
