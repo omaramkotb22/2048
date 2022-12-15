@@ -29,9 +29,6 @@ public class LeaderboardScene {
         Scene scene = new Scene(root,600,600);
         stage.setScene(scene);
     }
-    private void addPlayer(String name, int score){
-
-    }
 
 
 

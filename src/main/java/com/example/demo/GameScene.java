@@ -170,9 +170,7 @@ class GameScene {
             int max = 10000;
             int min = 1000;
             int randomInt = (int)Math.floor(Math.random()*(max-min+1)+min);
-            String guestName = ("Guest" + randomInt);
-            players.AddGuest(guestName);
-            return guestName;
+            return ("Guest" + randomInt);
         }
         return name;
     }

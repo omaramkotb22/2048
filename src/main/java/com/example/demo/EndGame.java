@@ -33,7 +33,8 @@ public class EndGame {
     private ReadPlayers map = new ReadPlayers("src/main/resources/com/example/demo/players.csv");
 
     public void endGameShow(Group root, Stage primaryStage, long score, String name) throws IOException {
-        var currentHighScore = map.getMap().get(name);
+
+        var currentHighScore = map.getMap().getOrDefault(name, 0);
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         VBox vBox = new VBox();
@@ -64,12 +65,16 @@ public class EndGame {
         });
         Text scoreText = new Text();
         if(score > currentHighScore){
-            scoreText.setText("Game Over\nNew Highscore!" + score);
-
+            scoreText.setText("Game Over\nNew Highscore! " + score);
         }
         else{
+            currentHighScore = Math.toIntExact(score);
             scoreText.setText("Game Over\n" + score + "\nHighscore still" + currentHighScore);
         }
+
+        map.getMap().put(name, (int) score);
+
+        WritePlayers.addPlayer(name, (int)score);
         GameSceneStyles.ScoreText(scoreText);
         vBox.getChildren().addAll(scoreText,restartButton, mainMenuButton,quitGameBtn);
         vBox.relocate(0,0);

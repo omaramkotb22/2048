@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,6 +10,12 @@ public class ReadPlayers{
     public HashMap<String, Integer> getMap() {
         return map;
     }
+
+    public void setHighscore(Integer highscore) {
+        this.highscore = highscore;
+    }
+
+    private Integer highscore;
 
     HashMap<String, Integer> map = new HashMap<String,Integer>();
 
@@ -24,15 +31,7 @@ public class ReadPlayers{
             map.put(str[0],Integer.valueOf(str[1]));
         }
     }
-    public void updatePlayer(String name, Integer new_score){
-            map.put(name,new_score);
-    }
 
 
-    public void AddGuest(String guestName) throws IOException {
-        map.put(guestName, 0);
-        readCSV("src/main/resources/com/example/demo/players.csv");
-
-    }
 }
 

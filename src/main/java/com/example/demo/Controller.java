@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -17,13 +18,21 @@ import java.util.Objects;
 
 public class Controller {
     @FXML
+    public TextField userNameText;
+    @FXML
     public Button settings;
     @FXML
     public Button help;
     private static Stage stage;
+
+
+
+
+
     private final Group gameRoot = new Group();
     private static Scene scene;
     private final Group controlsRoot = new Group();
+    @FXML
     GameScene game = new GameScene();
 
     public Controller() throws IOException {
@@ -39,7 +48,9 @@ public class Controller {
 //        Scene controlsScene = new Scene(controlsRoot, WIDTH, HEIGHT, Color.rgb(255,255,255));
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(gameScene);
-        game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot, "Omar");
+        String userName = userNameText.getText();
+        System.out.println("Text: "+userName);
+        game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot, userName);
         stage.show();
     }
     public void SwitchToMenu(ActionEvent event) throws IOException {
@@ -49,6 +60,7 @@ public class Controller {
         MenuStage.setScene(MenuScene);
         MenuStage.show();
     }
+
     public void SwitchToSettings(ActionEvent actionevent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SettingsLightTheme.fxml")));
         Scene SettingsScene = new Scene(root);
