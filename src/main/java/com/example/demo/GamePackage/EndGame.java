@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.GamePackage;
 
+import com.example.demo.Controller;
+import com.example.demo.PlayersPackage.Player;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -30,12 +32,6 @@ public class EndGame {
         if(singleInstance == null)
             singleInstance = new EndGame(gameScene);
         return singleInstance;
-    }
-    private void printMap(HashMap<String, Integer> map){
-        for (String name: map.keySet()) {
-            String value = map.get(name).toString();
-            System.out.println(name + " " + value);
-        }
     }
 
     public void endGameShow(Group root, Stage primaryStage, long score, String name) throws IOException {

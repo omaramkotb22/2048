@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.PlayersPackage;
 
 public class Player {
     public String getName() {

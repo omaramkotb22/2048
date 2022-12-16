@@ -1,9 +1,8 @@
-package com.example.demo;
+package com.example.demo.PlayersPackage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class ReadPlayers {

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.CellPackage;
 
 import javafx.scene.paint.Color;
 

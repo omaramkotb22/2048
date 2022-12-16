@@ -1,5 +1,10 @@
-package com.example.demo;
+package com.example.demo.GamePackage;
 
+import com.example.demo.*;
+import com.example.demo.CellPackage.Cell;
+import com.example.demo.CellPackage.Movements;
+import com.example.demo.PlayersPackage.Player;
+import com.example.demo.PlayersPackage.ReadPlayers;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -14,15 +19,14 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
-class GameScene {
+public class GameScene {
 
     private static final int HEIGHT = 500;
 
-    GameScene() throws IOException {
+    public GameScene() throws IOException {
     }
 
     public static int getN() {
@@ -62,7 +66,7 @@ class GameScene {
     /*
      * @return length of the block
      */
-    static double getLENGTH() {
+    public static double getLENGTH() {
         return LENGTH;
     }
     private int aForBound=0,bForBound=0;
@@ -202,7 +206,7 @@ class GameScene {
         return name;
     }
 
-    void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String name) throws IOException {
+    public void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String name) throws IOException {
         name = player(name);
 
         this.root = root;
@@ -238,15 +242,10 @@ class GameScene {
         randomFillNumber(1);
 
         String finalName = name;
-        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, key ->{
+        gameScene.addEventHandler(KeyEvent.KEY_PRESSED, key ->  {
             Platform.runLater(() -> {
                 int haveEmptyCell;
                 if (key.getCode() == KeyCode.DOWN) {
-//                    try {
-//                        EndGame.getInstance(this).endGameShow(endGameRoot, primaryStage, score, finalName);
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
                     Movements.moveDown();
                 } else if (key.getCode() == KeyCode.UP) {
                     Movements.moveUp();

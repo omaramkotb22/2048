@@ -1,4 +1,8 @@
-package com.example.demo;
+package com.example.demo.CellPackage;
+
+import com.example.demo.GamePackage.Checkers;
+import com.example.demo.GamePackage.GameScene;
+
 public class Movements {
     private static final Cell[][] cells = GameScene.getCells();
     private static final int n = GameScene.getN();

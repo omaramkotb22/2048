@@ -1,6 +1,7 @@
-package com.example.demo;
+package com.example.demo.CellPackage;
 
 
+import com.example.demo.TextMaker;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -23,14 +24,14 @@ public class Cell {
     /*
      * @param modify to be set
      */
-    void setModify(boolean modify) {
+    public void setModify(boolean modify) {
         this.modify = modify;
     }
 
     /*
      * @return true if the cell has been modified
      * */
-    boolean getModify() {
+    public boolean getModify() {
         return modify;
     }
 
@@ -42,7 +43,7 @@ public class Cell {
      * Constructor for the Cell class
      * @param x is the width of the block
      * */
-    Cell(double x, double y, double scale, Group root) { // Constructor for the Cell class, takes the width of the cell x the height of the cell y, the score on the Cell scale, and the group root
+    public Cell(double x, double y, double scale, Group root) { // Constructor for the Cell class, takes the width of the cell x the height of the cell y, the score on the Cell scale, and the group root
         rectangle = new Rectangle();
         rectangle.setX(x);
         rectangle.setY(y);
@@ -56,10 +57,10 @@ public class Cell {
     /*
      * @param textClass
      */
-    void setTextClass(Text textClass) {
+    public void setTextClass(Text textClass) {
         this.textClass = textClass;
     }
-    void changeCell(Cell cell) {
+    public void changeCell(Cell cell) {
         TextMaker.changeTwoText(textClass, cell.getTextClass());
         root.getChildren().remove(cell.getTextClass());
         root.getChildren().remove(textClass);
@@ -74,7 +75,7 @@ public class Cell {
         cell.setColor(cell.getNumber());
     }
 
-    void adder(Cell cell) {
+    public void adder(Cell cell) {
         cell.getTextClass().setText((cell.getNumber() + this.getNumber()) + "");
         textClass.setText("0");
         root.getChildren().remove(textClass);
@@ -82,21 +83,21 @@ public class Cell {
         setColor(getNumber());
     }
 
-    void setColor(int number) {
+    public void setColor(int number) {
         new CellColors(number, rectangle).setColorByNumber(number);
         }
 
 
 
-    double getX() {
+    public double getX() {
         return rectangle.getX();
     }
 
-    double getY() {
+    public double getY() {
         return rectangle.getY();
     }
 
-    int getNumber() {
+    public int getNumber() {
         return Integer.parseInt(textClass.getText());
     }
 

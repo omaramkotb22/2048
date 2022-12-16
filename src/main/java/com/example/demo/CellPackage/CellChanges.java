@@ -1,11 +1,10 @@
-package com.example.demo;
+package com.example.demo.CellPackage;
 
+import com.example.demo.TextMaker;
 import javafx.scene.Group;
 
 public class CellChanges extends Cell{
-
-
-    private Cell cell[][];
+    
     private Group root;
     private double x;
     private double y;
@@ -19,7 +18,7 @@ public class CellChanges extends Cell{
 
 
     }
-    void changeCell(Cell cell) {
+    public void changeCell(Cell cell) {
         TextMaker.changeTwoText(cell.getTextClass(), cell.getTextClass());
         root.getChildren().remove(cell.getTextClass());
         root.getChildren().remove(textClass);

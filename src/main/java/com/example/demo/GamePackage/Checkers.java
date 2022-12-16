@@ -1,6 +1,7 @@
-package com.example.demo;
+package com.example.demo.GamePackage;
 
 
+import com.example.demo.CellPackage.Cell;
 
 public class Checkers {
     private static final Cell[][] cells = GameScene.getCells();

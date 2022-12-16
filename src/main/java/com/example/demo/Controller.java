@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.GamePackage.GameScene;
+import com.example.demo.leaderboardPackage.LeaderboardScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,8 +41,8 @@ public class Controller {
 
 
     private final Group gameRoot = new Group();
-    private static Scene scene;
-    private final Group controlsRoot = new Group();
+//    private static Scene scene;
+//    private final Group controlsRoot = new Group();
     @FXML
     GameScene game = new GameScene();
 
@@ -74,13 +76,12 @@ public class Controller {
         Scene SettingsScene = new Scene(root);
         stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
         Button backButton = new Button();
-
         stage.setScene(SettingsScene);
         stage.show();
     }
     public void SwitchToLeaderboard(ActionEvent actionEvent) throws IOException{
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        new LeaderboardScene().leaderboard(gameRoot, stage);
+        LeaderboardScene.getInstance().leaderboard(gameRoot, stage);
         stage.show();
     }
     public void OpenHelp(ActionEvent actionEvent){

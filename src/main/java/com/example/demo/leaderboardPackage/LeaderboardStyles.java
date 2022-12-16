@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.leaderboardPackage;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
