@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Random;
+import java.util.LinkedList;
 
 
 public class EndGame {
@@ -20,21 +20,25 @@ public class EndGame {
     }
 
     private Scene endGameScene;
+    private GameScene gameScene;
     private static EndGame singleInstance = null;
 
-    private EndGame() throws IOException {
-
+    public EndGame(GameScene gameScene) throws IOException {
+        this.gameScene = gameScene;
     }
-    public static EndGame getInstance() throws IOException {
+    public static EndGame getInstance(GameScene gameScene) throws IOException {
         if(singleInstance == null)
-            singleInstance = new EndGame();
+            singleInstance = new EndGame(gameScene);
         return singleInstance;
     }
-    private ReadPlayers map = new ReadPlayers("src/main/resources/com/example/demo/players.csv");
+    private void printMap(HashMap<String, Integer> map){
+        for (String name: map.keySet()) {
+            String value = map.get(name).toString();
+            System.out.println(name + " " + value);
+        }
+    }
 
     public void endGameShow(Group root, Stage primaryStage, long score, String name) throws IOException {
-
-        var currentHighScore = map.getMap().getOrDefault(name, 0);
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         VBox vBox = new VBox();
@@ -64,17 +68,23 @@ public class EndGame {
 
         });
         Text scoreText = new Text();
-        if(score > currentHighScore){
+        Integer currentHighscore = 0;
+        LinkedList<Player> playerList = gameScene.getPlayerList();
+        for (Player player : playerList) {
+            if(player.getName().equals(name)){
+                currentHighscore = player.getHighscore();
+            }
+        }
+
+        if(score > (long) currentHighscore){
             scoreText.setText("Game Over\nNew Highscore! " + score);
+            playerList.add(new Player(name, (int) score));
         }
-        else{
-            currentHighScore = Math.toIntExact(score);
-            scoreText.setText("Game Over\n" + score + "\nHighscore still" + currentHighScore);
+        else {
+            currentHighscore = Math.toIntExact(score);
+            scoreText.setText("Game Over\n" + score + "\nHighscore still" + currentHighscore);
         }
 
-        map.getMap().put(name, (int) score);
-
-        WritePlayers.addPlayer(name, (int)score);
         GameSceneStyles.ScoreText(scoreText);
         vBox.getChildren().addAll(scoreText,restartButton, mainMenuButton,quitGameBtn);
         vBox.relocate(0,0);

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 
 class GameScene {
@@ -164,19 +165,46 @@ class GameScene {
         popup.setScene(popupScene);
         popup.showAndWait();
     }
-    private ReadPlayers players = new ReadPlayers("src/main/resources/com/example/demo/players.csv");
+
+
+    private final ReadPlayers players = new ReadPlayers("src/main/resources/com/example/demo/players.csv");
+
+
+    public LinkedList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(LinkedList<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    private LinkedList<Player> playerList = players.getPlayerList();
+
+
     private String player(String name) throws IOException {
-        if(!players.getMap().containsKey(name)) {
+        if((Controller.getUserName().equals(""))) {
             int max = 10000;
             int min = 1000;
             int randomInt = (int)Math.floor(Math.random()*(max-min+1)+min);
-            return ("Guest" + randomInt);
+            String guestName = ("Guest" + randomInt);
+            playerList.add(new Player(guestName, 0));
+            players.setPlayerList(playerList);
+            setPlayerList(playerList);
+            return guestName;
         }
+        for(Player player: playerList){
+            String playerName = player.getName();
+            Integer playerHighscore = player.getHighscore();
+
+        }
+
+
         return name;
     }
 
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String name) throws IOException {
         name = player(name);
+
         this.root = root;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -214,11 +242,11 @@ class GameScene {
             Platform.runLater(() -> {
                 int haveEmptyCell;
                 if (key.getCode() == KeyCode.DOWN) {
-                    try {
-                        EndGame.getInstance().endGameShow(endGameRoot, primaryStage, score, finalName);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+//                    try {
+//                        EndGame.getInstance(this).endGameShow(endGameRoot, primaryStage, score, finalName);
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
                     Movements.moveDown();
                 } else if (key.getCode() == KeyCode.UP) {
                     Movements.moveUp();
@@ -236,13 +264,11 @@ class GameScene {
                 if (haveEmptyCell == -1) {
                     if (Checkers.canNotMove()) {
                         try {
-                            EndGame.getInstance().endGameShow(endGameRoot, primaryStage, score, finalName);
+                            EndGame.getInstance(this).endGameShow(endGameRoot, primaryStage, score, finalName);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                         ((Stage) root.getScene().getWindow()).close();
-                        ((Stage)endGameRoot.getScene().getWindow()).close();
-//                        root.getChildren().clear();
                         score = 0;
                     }
                 } else if(haveEmptyCell == 1)

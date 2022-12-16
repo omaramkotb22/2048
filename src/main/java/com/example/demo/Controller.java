@@ -8,8 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,6 +20,7 @@ import java.util.Objects;
 
 
 public class Controller {
+
     @FXML
     public TextField userNameText;
     @FXML
@@ -25,6 +29,11 @@ public class Controller {
     public Button help;
     private static Stage stage;
 
+    public static String getUserName() {
+        return userName;
+    }
+
+    private static String userName;
 
 
 
@@ -48,8 +57,7 @@ public class Controller {
 //        Scene controlsScene = new Scene(controlsRoot, WIDTH, HEIGHT, Color.rgb(255,255,255));
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(gameScene);
-        String userName = userNameText.getText();
-        System.out.println("Text: "+userName);
+        userName = userNameText.getText();
         game.game(gameScene, gameRoot, stage, endGameScene, endgameRoot, userName);
         stage.show();
     }
@@ -65,6 +73,8 @@ public class Controller {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SettingsLightTheme.fxml")));
         Scene SettingsScene = new Scene(root);
         stage = (Stage)((Node) actionevent.getSource()).getScene().getWindow();
+        Button backButton = new Button();
+
         stage.setScene(SettingsScene);
         stage.show();
     }
@@ -72,5 +82,22 @@ public class Controller {
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         new LeaderboardScene().leaderboard(gameRoot, stage);
         stage.show();
+    }
+    public void OpenHelp(ActionEvent actionEvent){
+        Popup popup = new Popup();
+        Label statement_1 = new Label("The object of the game is to combine the numbers displayed on the tiles until you reach 2048");
+        Label statement_2 = new Label("You hit the arrow keys on your keyboard to move the tiles around — and also to generate new tiles");
+        Label statement_3 = new Label("Your objective is to reach 2048 before the board fills up");
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(statement_1,statement_2,statement_3);
+//        popup.getContent().addAll(statement_1,statement_2,statement_3);
+
+        Stage popupStage = new Stage();
+        Scene scene = new Scene(vbox, 200,200);
+        popupStage.setScene(scene);
+        popupStage.show();
+
+
+
     }
 }
