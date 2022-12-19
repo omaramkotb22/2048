@@ -1,8 +1,6 @@
 package com.example.demo.PlayersPackage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.LinkedList;
 
 public class ReadPlayers {
@@ -14,16 +12,14 @@ public class ReadPlayers {
         PlayerList = playerList;
     }
 
-    LinkedList<Player> PlayerList = new LinkedList<Player>();
-
-
-    private Integer highscore;
+    LinkedList<Player> PlayerList = new LinkedList<>();
 
 
 
 
     public ReadPlayers(String filename) throws IOException {
         readCSV(filename);
+
     }
 
     private void readCSV(String filename) throws IOException{

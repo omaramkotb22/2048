@@ -4,12 +4,28 @@ import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import javafx.scene.shape.Rectangle;
-
+/**
+ * This class represents the colors of the cells in the game.
+ * It contains a {@link Rectangle} object that represents the visual representation of the cell.
+ * The CellColors class has a method to change the color of the cell based on its number.
+ */
 public class CellColors {
+    /**
+     * Constructor for the CellColors class.
+     * Takes the number and rectangle as arguments.
+     * These values are used to initialize the {@link Rectangle} object of the CellColors.
+     * @param number the number of the cell
+     * @param rectangle the rectangle object of the cell
+     */
     private final Rectangle rectangle;
     public CellColors(int number, Rectangle rectangle){
         this.rectangle = rectangle;
     }
+    /**
+     * Changes the color of the {@link Rectangle} object based on the given number.
+     * The mapping of numbers to colors is stored in a {@link HashMap}.
+     * @param number the number to use to determine the color of the rectangle.
+     */
     public void setColorByNumber(int number){
         HashMap<Integer, float[]> colors = new HashMap<Integer, float[]>();
         colors.put(0, new float[]{206,245,254,(float) 1});

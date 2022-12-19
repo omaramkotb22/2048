@@ -49,6 +49,8 @@ public class GameScene {
         return cells;
     }
 
+
+
     public void setCells(Cell[][] cells) {
         GameScene.cells = cells;
     }
@@ -184,7 +186,9 @@ public class GameScene {
 
     private LinkedList<Player> playerList = players.getPlayerList();
 
-
+    public String getPlayer(String name) throws IOException {
+        return player(name);
+    }
     private String player(String name) throws IOException {
         if((Controller.getUserName().equals(""))) {
             int max = 10000;
@@ -199,17 +203,15 @@ public class GameScene {
         for(Player player: playerList){
             String playerName = player.getName();
             Integer playerHighscore = player.getHighscore();
-
         }
 
 
         return name;
     }
 
+
     public void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String name) throws IOException {
         name = player(name);
-
-        this.root = root;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 double locX = (j) * LENGTH + (j + 1) * distanceBetweenCells + 40;
@@ -219,8 +221,9 @@ public class GameScene {
                 root.getChildren().add(cells[i][j].getRectangle());
             }
 
-
         }
+        this.root = root;
+
 
         Text text = new Text();
         Text nameText = new Text();
@@ -263,7 +266,7 @@ public class GameScene {
                 if (haveEmptyCell == -1) {
                     if (Checkers.canNotMove()) {
                         try {
-                            EndGame.getInstance(this).endGameShow(endGameRoot, primaryStage, score, finalName);
+                            EndGame.getInstance(this).endGameShow(primaryStage, score, finalName);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

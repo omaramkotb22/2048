@@ -12,7 +12,7 @@ public class TextMaker{
     private TextMaker() {
 
     }
-    /*
+    /**
     * @return a TextMaker if singleInstance is not equal to null
     */
     public static TextMaker getSingleInstance() {
@@ -20,7 +20,7 @@ public class TextMaker{
             singleInstance = new TextMaker();
         return singleInstance;
     }
-    /*
+    /**
     * @return a text that will be written on a cell
     * */
     public Text madeText(String input, double xCell, double yCell, Group root) {
@@ -34,7 +34,7 @@ public class TextMaker{
         return text;
     }
 
-    /*
+    /**
     * @param first text that will be changed
     * @param second text that should replace the first text
     * */

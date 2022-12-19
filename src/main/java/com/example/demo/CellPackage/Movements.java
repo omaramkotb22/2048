@@ -3,9 +3,23 @@ package com.example.demo.CellPackage;
 import com.example.demo.GamePackage.Checkers;
 import com.example.demo.GamePackage.GameScene;
 
+/**
+ * This class represents the movements of the cells in the game.
+ * It contains several private static methods that move the cells in different directions.
+ * It also has public static methods that can be called to move the cells in a particular direction.
+ */
 public class Movements {
     private static final Cell[][] cells = GameScene.getCells();
     private static final int n = GameScene.getN();
+    /**
+     * Returns the destination coordinate for a cell to be moved in a particular direction.
+     * The direction is determined by the given character: 'l' for left, 'r' for right, 'u' for up, or 'd' for down.
+     *
+     * @param i the current row coordinate of the cell
+     * @param j the current column coordinate of the cell
+     * @param direct the character representing the direction to move
+     * @return the destination coordinate for the cell
+     */
 
     private static int passDestination(int i, int j, char direct) {
         int coordinate = j;
@@ -26,6 +40,7 @@ public class Movements {
         }
         return -1;
     }
+
     private static int up(int coordinate, int i, int j){
         for (int k = i - 1; k >= 0; k--) {
             if (cells[k][j].getNumber() != 0) {
@@ -37,6 +52,7 @@ public class Movements {
         }
         return coordinate;
     }
+
     private static int down(int coordinate, int i, int j){
         for (int k = i + 1; k <= n - 1; k++) {
             if (cells[k][j].getNumber() != 0) {
@@ -104,6 +120,7 @@ public class Movements {
         }
 
     }
+
     private static void moveVertically(int i, int j, int des, int sign) {
         if (Checkers.isValidDesV(i, j, des, sign)) {
             cells[i][j].adder(cells[des + sign][j]);
@@ -123,6 +140,7 @@ public class Movements {
         }
 
     }
+
     public static void moveRight() {
         for (int i = 0; i < n; i++) {
             for (int j = n - 1; j >= 0; j--) {

@@ -15,7 +15,6 @@ public class GameSceneStyles {
         button.setText(text);
         button.setTextFill(Color.rgb(35,191,223));
         button.setStyle("-fx-background-color: #ffffff;" + "-fx-font-weight: bold;" + "-fx-font-size: 20 px");
-
     }
 
 }

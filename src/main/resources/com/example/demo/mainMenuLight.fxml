@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
     <children>
         <ImageView fitHeight="185.0" fitWidth="185.0" layoutX="208.0" layoutY="53.0">
@@ -14,22 +15,22 @@
                 <Image url="@LightThemeLogo.png" />
             </image>
         </ImageView>
-        <Button fx:id="start" layoutX="137.0" layoutY="300.0" mnemonicParsing="false" onAction="#StartGameScene" prefHeight="60.0" prefWidth="326.0" text="Start" textFill="#23bfdf">
+        <Button fx:id="start" layoutX="137.0" layoutY="300.0" mnemonicParsing="false" onAction="#StartGameScene" prefHeight="60.0" prefWidth="326.0" text="Start">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
-        <Button fx:id="help" layoutX="137.0" layoutY="369.0" mnemonicParsing="false" onAction="#OpenHelp" prefHeight="60.0" prefWidth="326.0" text="Help" textFill="#23bfdf">
+        <Button fx:id="help" layoutX="137.0" layoutY="369.0" mnemonicParsing="false" onAction="#OpenHelp" prefHeight="60.0" prefWidth="326.0" text="Help">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
-        <Button fx:id="settings" layoutX="137.0" layoutY="439.0" mnemonicParsing="false" onAction="#SwitchToSettings" prefHeight="60.0" prefWidth="326.0" text="Settings" textFill="#23bfdf">
+        <Button fx:id="settings" layoutX="137.0" layoutY="439.0" mnemonicParsing="false" onAction="#SwitchToSettings" prefHeight="60.0" prefWidth="326.0" text="Settings">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
-      <Button fx:id="settings1" layoutX="137.0" layoutY="511.0" mnemonicParsing="false" onAction="#SwitchToLeaderboard" prefHeight="60.0" prefWidth="326.0" text="Leaderboard" textFill="#23bfdf">
+      <Button fx:id="settings1" layoutX="137.0" layoutY="511.0" mnemonicParsing="false" onAction="#SwitchToLeaderboard" prefHeight="60.0" prefWidth="326.0" text="Leaderboard" >
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
